@@ -18,10 +18,29 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #141414;
+}
+
+#ft-welcome, #ft-login {
+  height: 100svh;
+}
+
+#ft-welcome::before, #ft-login::before {
+  content: "";
+  background-image: url(/overlay.svg);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: top left;
+  position: absolute;
+  top: -40px;
+  left: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 80%;
+}
+
+#ft-login::before{
+  background-image: url(/overlay-login.svg);
+  top: 0px;
+  height: 40%;
 }

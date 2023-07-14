@@ -12,10 +12,16 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
+    "iron-session": "^6.3.1",
+    "msql": "^1.0.3",
+    "mysql": "^2.18.1",
     "next": "13.4.9",
+    "next-iron-session": "^4.2.0",
+    "next-session": "^4.0.5",
     "postcss": "8.4.25",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-type-animation": "^3.1.0",
     "tailwindcss": "3.3.2"
   }
 }
