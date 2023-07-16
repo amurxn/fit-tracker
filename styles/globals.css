@@ -16,16 +16,22 @@
   }
 }
 
+html {
+  background: white;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: #141414;
 }
 
-#ft-welcome, #ft-login {
+#ft-welcome,
+#ft-login {
   height: 100svh;
 }
 
-#ft-welcome::before, #ft-login::before {
+#ft-welcome::before,
+#ft-login::before {
   content: "";
   background-image: url(/overlay.svg);
   background-size: 100% auto;
@@ -39,8 +45,72 @@ body {
   height: 80%;
 }
 
-#ft-login::before{
+#ft-login::before {
   background-image: url(/overlay-login.svg);
   top: 0px;
   height: 40%;
+}
+
+#main {
+  padding: 15px 10px;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 0;
+  min-height: 100svh;
+}
+
+#categories {
+  width: 100%;
+  padding-top: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none; /* Hide scrollbar on IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar on Firefox */
+}
+
+#categories ul {
+  flex-wrap: nowrap;
+  scroll-snap-align: start;
+  touch-action: pan-y;
+}
+
+.ft-exercise-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 40.54%,
+    rgba(0, 0, 0, 0.8) 88.29%
+  );
+}
+
+#top-wrap {
+  position: fixed;
+  padding: 15px 10px;
+  width: 100%;
+  z-index: 99;
+  background-color: #141414;
+}
+
+#exercises {
+  margin-top: 150px;
+  z-index: 9;
+  position: relative;
+}
+
+.ft-box{
+  width: calc(50% - 3px);
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.custom-number-input input:focus {
+  outline: none !important;
+}
+
+.custom-number-input button:focus {
+  outline: none !important;
 }

@@ -1,48 +1,65 @@
 import { useState } from "react"
+import { Button, Input } from "../../components/ui"
 
 function RegisterForm({ onSubmit }) {
+  const [email, setEmail] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    onSubmit(username, password)
+    onSubmit(email, username, password)
   }
 
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="w-64">
-      <div className="mb-4">
-        <label htmlFor="username" className="text-white">
-          Username:
-        </label>
-        <input
+    <form
+      onSubmit={handleSubmit}
+      className="w-full flex flex-col h-[65%] justify-between"
+    >
+      <div className="flex flex-col gap-3">
+      <Input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          icon="email-icon"
+          onChange={handleEmailChange}
+        />
+        <Input
           type="text"
           id="username"
           name="username"
-          className="border border-gray-300 bg-gray-100 text-black rounded px-2 py-1"
+          placeholder="Username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          icon="username-icon"
+          onChange={handleUsernameChange}
         />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="password" className="text-white">
-          Password:
-        </label>
-        <input
+        <Input
           type="password"
           id="password"
           name="password"
-          className="border border-gray-300 bg-gray-100 text-black rounded px-2 py-1"
+          placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          icon="password-icon"
+          onChange={handlePasswordChange}
         />
       </div>
-      <button
-        type="submit"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
+      <Button type="submit" color="red">
         Register
-      </button>
+      </Button>
     </form>
   )
 }

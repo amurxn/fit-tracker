@@ -1,6 +1,7 @@
 import { withSessionRoute } from "../../config/withSession"
 import db from "../../config/db"
 import util from "util"
+import bcrypt from "bcrypt"
 
 const queryPromise = util.promisify(db.query).bind(db)
 
@@ -11,7 +12,7 @@ async function createSessionRoute(req, res) {
     const { username, password } = req.body
 
     try {
-      // Check if the user exists and the password is correct
+      // Check if the user exists
       const query = "SELECT * FROM users WHERE username = ?"
       const rows = await queryPromise(query, [username])
 
@@ -22,7 +23,10 @@ async function createSessionRoute(req, res) {
 
       const user = rows[0]
 
-      if (user.password !== password) {
+      // Compare the entered password with the stored hashed password
+      const passwordsMatch = await bcrypt.compare(password, user.password)
+
+      if (!passwordsMatch) {
         res.status(401).json({ error: "Invalid credentials" })
         return
       }

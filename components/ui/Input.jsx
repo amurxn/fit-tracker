@@ -1,7 +1,7 @@
 import React from "react"
 import Image from "next/image"
 
-const Input = ({type, id, name, placeholder, icon}) => {
+const Input = ({type, id, name, placeholder, icon, onChange}) => {
   return (
     <div className="relative w-full">
       <Image
@@ -16,7 +16,8 @@ const Input = ({type, id, name, placeholder, icon}) => {
         id={id}
         name={name}
         placeholder={placeholder}
-        className="bg-gray py-4 px-12 rounded-xl w-full placeholder-lightGray focus:outline-none font-medium"
+        className="bg-darkGray py-4 px-12 rounded-xl w-full placeholder-lightGray focus:outline-none font-medium"
+        onChange={onChange}
       />
     </div>
   )

@@ -10,8 +10,17 @@ function LoginForm({ onSubmit }) {
     onSubmit(username, password)
   }
 
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="w-full flex flex-col">
+    <form onSubmit={handleSubmit} className="w-full flex flex-col h-[65%] justify-between">
+      <div className="flex flex-col gap-3">
         <Input
           type="text"
           id="username"
@@ -19,17 +28,20 @@ function LoginForm({ onSubmit }) {
           placeholder="Username"
           value={username}
           icon="username-icon"
+          onChange={handleUsernameChange}
         />
-        <input
+        <Input
           type="password"
           id="password"
           name="password"
-          className="border border-gray-300 bg-gray-100 text-black rounded px-2 py-1"
+          placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          icon="password-icon"
+          onChange={handlePasswordChange}
         />
+      </div>
       <Button type="submit" color="red">
-        Login
+        Log in
       </Button>
     </form>
   )

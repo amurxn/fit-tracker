@@ -1,18 +1,36 @@
 import db from '../../config/db';
 import { promisify } from 'util';
+import bcrypt from 'bcrypt';
 
 const queryPromise = promisify(db.query).bind(db);
 
 const registerUser = async (req, res) => {
   if (req.method === 'POST') {
-    const { username, password } = req.body;
+    const { email, username, password } = req.body;
 
     try {
-      // Perform necessary validations on username and password
+      // Check if email already exists
+      const emailCheckQuery = 'SELECT * FROM users WHERE email = ?';
+      const existingEmailUser = await queryPromise(emailCheckQuery, [email]);
 
-      // Insert the user data into the database
-      const query = 'INSERT INTO users (username, password) VALUES (?, ?)';
-      await queryPromise(query, [username, password]);
+      if (existingEmailUser.length > 0) {
+        res.status(400).json({ error: 'Email already exists' });
+        return;
+      }
+
+      // Check if username already exists
+      const usernameCheckQuery = 'SELECT * FROM users WHERE username = ?';
+      const existingUsernameUser = await queryPromise(usernameCheckQuery, [username]);
+
+      if (existingUsernameUser.length > 0) {
+        res.status(400).json({ error: 'Username already exists' });
+        return;
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const insertQuery = 'INSERT INTO users (email, username, password) VALUES (?, ?, ?)';
+      await queryPromise(insertQuery, [email, username, hashedPassword]);
 
       res.status(201).json({ message: 'User registered successfully!' });
     } catch (error) {
@@ -25,3 +43,4 @@ const registerUser = async (req, res) => {
 };
 
 export default registerUser;
+
