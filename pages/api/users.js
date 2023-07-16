@@ -1,6 +1,7 @@
 import db from '../../config/db';
 
 const getUsers = (req, res) => {
+  console.log(db)
   db.getConnection((error, connection) => {
     if (error) {
       console.error('Error connecting to MySQL:', error);
